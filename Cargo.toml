@@ -1,0 +1,16 @@
+[package]
+name = "hitoku"
+version = "0.1.0"
+edition = "2021"
+description = """
+hitoku is a simple wrapper command for jinja (minijinja). 
+\tIt generates files by filling template variables with environment variables from the execution environment.
+"""
+
+[dependencies]
+minijinja = "2.0.3"
+seahorse = "2.2.0"
+
+[dev-dependencies]
+cargo-edit = "0.12.3"
+clippy = "0.0.302"
