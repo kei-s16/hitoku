@@ -35,7 +35,7 @@ jobs:
           rustup default ${{ matrix.toolchain }}
           rustup component add clippy
       - name: "アプリのビルド"
-        run: cargo build --verbose
+        run: cargo build --verbose --release
       - name: "clippyの実行"
         run: cargo clippy
       - name: "ユニットテストの実行"
