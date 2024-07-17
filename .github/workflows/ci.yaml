@@ -1,0 +1,38 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths:
+      - '**/*.rs'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  run-integrations:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        toolchain:
+          - stable
+          - nightly
+    steps:
+      - name: "ブランチの切り替え"
+        uses: actions/checkout@v4
+      - name: "toolchainの設定とインストール"
+        run: |
+          rustup update ${{ matrix.toolchain }}
+          rustup default ${{ matrix.toolchain }}
+          rustup component add clippy
+      - name: "アプリのビルド"
+        run: cargo build --verbose --release
+      - name: "clippyの実行"
+        run: cargo clippy
+      - name: "ユニットテストの実行"
+        run: cargo test --verbose
+
