@@ -1,0 +1,28 @@
+name: "release"
+
+on:
+  push:
+    tags:
+      - v*
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "ブランチの切り替え"
+        uses: actions/checkout@v4
+      - name: "toolchainの設定とインストール"
+        run: |
+          rustup update ${{ matrix.toolchain }}
+          rustup default ${{ matrix.toolchain }}
+          rustup component add clippy
+      - name: "アプリのビルド"
+        run: cargo build --verbose --release
+      - name: "Releaseの作成"
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ./target/release/hitoku
+
