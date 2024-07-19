@@ -21,8 +21,13 @@ jobs:
           rustup component add clippy
       - name: "アプリのビルド"
         run: cargo build --verbose --release
+      - name: "チェックサムの生成"
+        run: |
+          sha256sum ./target/release/hitoku | awk '{ print $1 }' > ./checksum.txt
       - name: "Releaseの作成"
         uses: softprops/action-gh-release@v2
         with:
-          files: ./target/release/hitoku
+          files: |
+            ./target/release/hitoku
+            ./checksum.txt
 
