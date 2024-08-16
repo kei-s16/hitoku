@@ -19,6 +19,12 @@ jobs:
         uses: kei-s16/hitoku@feature/provide-actions
       - name: "パスの確認"
         run: which hitoku
+      - run: env
+        env:
+          DB_ENDPOINT: "TEST_VAR_A"
+          DB_USER: "TEST_VAR_B"
+          DB_PASSWORD: "TEST_VAR_C"
+          DB_NAME: "TEST_VAR_D"
       - name: "テスト実行(preview)"
         run: hitoku preview ./example.toml.tmpl
         working-directory: ./tests
