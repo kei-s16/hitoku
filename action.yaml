@@ -1,0 +1,30 @@
+name: 'setup hitoku'
+description: ''
+inputs:
+  version:
+    description: ''
+    required: false
+    default: ''
+runs:
+  using: 'composite'
+  steps:
+    - shell: bash
+      run: |
+        set -e
+
+        ARCH=$(uname -m)
+        if [ "${ARCH}" != "x86_64" ]; then
+          echo "Unsupported architecture"
+          exit 1
+        fi
+
+        mkdir -p ${RUNNER_TOOL_CACHE}/hitoku
+
+        cd /tmp
+        curl -O https://github.com/kei-s16/hitoku/releases/download/v0.0.1-test3/hitoku
+        sudo install hitoku ${RUNNER_TOOL_CACHE}/hitoku
+
+        echo "${RUNNER_TOOL_CACHE}/hitoku" >> $GITHUB_PATH
+
+        ${RUNNER_TOOL_CACHE}/hitoku/hitoku
+
