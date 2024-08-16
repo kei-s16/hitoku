@@ -1,0 +1,20 @@
+name: "test custom action"
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths:
+      - 'action.yaml'
+
+jobs:
+  run-integrations:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "ブランチの切り替え"
+        uses: actions/checkout@v4
+      - name: "カスタムアクションの実行"
+        uses: kei-s16/hitoku@feature/provide-actions
+      - name: "テスト実行"
+        run: hitoku --help
