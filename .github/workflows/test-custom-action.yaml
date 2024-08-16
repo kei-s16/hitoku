@@ -23,18 +23,18 @@ jobs:
         run: hitoku preview ./example.toml.tmpl
         working-directory: ./tests
         env:
-          DB_ENDPOINT: TEST_VAR_A
-          DB_USER: TEST_VAR_B
-          DB_PASSWORD: TEST_VAR_C
-          DB_NAME: TEST_VAR_D
+          DB_ENDPOINT: "TEST_VAR_A"
+          DB_USER: "TEST_VAR_B"
+          DB_PASSWORD: "TEST_VAR_C"
+          DB_NAME: "TEST_VAR_D"
       - name: "テスト実行(generate)"
         run: hitoku generate ./example.toml.tmpl example.toml
         working-directory: ./tests
         env:
-          DB_ENDPOINT: TEST_VAR_A
-          DB_USER: TEST_VAR_B
-          DB_PASSWORD: TEST_VAR_C
-          DB_NAME: TEST_VAR_D
+          DB_ENDPOINT: "TEST_VAR_A"
+          DB_USER: "TEST_VAR_B"
+          DB_PASSWORD: "TEST_VAR_C"
+          DB_NAME: "TEST_VAR_D"
       - name: "出力確認(ls)"
         run: ls ./tests
       - name: "出力確認(cat)"
