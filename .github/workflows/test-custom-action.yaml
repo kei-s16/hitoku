@@ -35,6 +35,8 @@ jobs:
           DB_USER: TEST_VAR_B
           DB_PASSWORD: TEST_VAR_C
           DB_NAME: TEST_VAR_D
-      - name: "出力確認"
+      - name: "出力確認(ls)"
+        run: ls ./tests
+      - name: "出力確認(cat)"
         run: cat ./tests/example.toml
 
