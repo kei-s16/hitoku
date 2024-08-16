@@ -7,7 +7,6 @@ on:
   pull_request:
     paths:
       - 'action.yaml'
-      - '.github/workflows/test-custom-action.yaml'
 
 jobs:
   run-integrations:
