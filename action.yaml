@@ -21,7 +21,7 @@ runs:
         mkdir -p ${RUNNER_TOOL_CACHE}/hitoku
 
         cd /tmp
-        curl -O https://github.com/kei-s16/hitoku/releases/download/v0.0.1-test3/hitoku
+        curl -LO https://github.com/kei-s16/hitoku/releases/download/v0.0.1-test3/hitoku
         sudo chmod 755 hitoku
         sudo install hitoku ${RUNNER_TOOL_CACHE}/hitoku
 
