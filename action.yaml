@@ -26,5 +26,5 @@ runs:
 
         echo "${RUNNER_TOOL_CACHE}/hitoku" >> $GITHUB_PATH
 
-        ${RUNNER_TOOL_CACHE}/hitoku/hitoku
+        "${RUNNER_TOOL_CACHE}/hitoku/hitoku"
 
