@@ -16,5 +16,8 @@ jobs:
         uses: actions/checkout@v4
       - name: "カスタムアクションの実行"
         uses: kei-s16/hitoku@feature/provide-actions
+      - name: "パスの確認"
+        run: which hitoku
       - name: "テスト実行"
         run: hitoku --help
+
