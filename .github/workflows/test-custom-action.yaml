@@ -15,7 +15,7 @@ jobs:
       - name: "ブランチの切り替え"
         uses: actions/checkout@v4
       - name: "カスタムアクションの実行"
-        uses: kei-s16/hitoku@feature/provide-actions
+        uses: kei-s16/hitoku@main
       - name: "パスの確認"
         run: which hitoku
       - run: env
