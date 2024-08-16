@@ -1,0 +1,71 @@
+name: "test custom action"
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths:
+      - 'action.yaml'
+
+jobs:
+  run-integrations:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "ブランチの切り替え"
+        uses: actions/checkout@v4
+      - name: "カスタムアクションの実行"
+        uses: kei-s16/hitoku@main
+      - name: "パスの確認"
+        run: which hitoku
+      - run: env
+        env:
+          DB_ENDPOINT: "TEST_VAR_A"
+          DB_USER: "TEST_VAR_B"
+          DB_PASSWORD: "TEST_VAR_C"
+          DB_NAME: "TEST_VAR_D"
+      - name: "テスト実行(preview)"
+        run: hitoku preview ./example.toml.tmpl
+        working-directory: ./tests
+        env:
+          DB_ENDPOINT: "TEST_VAR_A"
+          DB_USER: "TEST_VAR_B"
+          DB_PASSWORD: "TEST_VAR_C"
+          DB_NAME: "TEST_VAR_D"
+      - name: "テスト実行(generate)"
+        run: hitoku generate ./example.toml.tmpl example.toml
+        working-directory: ./tests
+        env:
+          DB_ENDPOINT: "TEST_VAR_A"
+          DB_USER: "TEST_VAR_B"
+          DB_PASSWORD: "TEST_VAR_C"
+          DB_NAME: "TEST_VAR_D"
+      - name: "出力確認(ls)"
+        run: ls ./tests
+      - name: "出力確認(cat)"
+        run: cat ./tests/example.toml
+
+      - name: "削除"
+        run: rm ./tests/example.toml
+
+      - name: "テスト実行(preview, secrets)"
+        run: hitoku preview ./example.toml.tmpl
+        working-directory: ./tests
+        env:
+          DB_ENDPOINT: ${{ secrets.SUPER_SECRET_A}}
+          DB_USER: ${{ secrets.SUPER_SECRET_B}}
+          DB_PASSWORD: ${{ secrets.SUPER_SECRET_C}}
+          DB_NAME: ${{ secrets.SUPER_SECRET_D}}
+      - name: "テスト実行(generate, secrets)"
+        run: hitoku generate ./example.toml.tmpl example.toml
+        working-directory: ./tests
+        env:
+          DB_ENDPOINT: ${{ secrets.SUPER_SECRET_A}}
+          DB_USER: ${{ secrets.SUPER_SECRET_B}}
+          DB_PASSWORD: ${{ secrets.SUPER_SECRET_C}}
+          DB_NAME: ${{ secrets.SUPER_SECRET_D}}
+      - name: "出力確認(ls, secrets)"
+        run: ls ./tests
+      - name: "出力確認(cat, secrets)"
+        run: cat ./tests/example.toml
+
